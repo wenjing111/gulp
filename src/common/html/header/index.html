@@ -1,0 +1,16 @@
+<header>
+	<div class="logo"></div>
+	<ul class="nav">
+		<li @@if (context.index==='active' ) { class="active nav-item" }>
+			<a @@if (context.path==='home' ){href="#"} @@if (context.path !=='home' ) {href="../../index.html" }>首页</a>
+		</li>
+		<li @@if (context.news==='active') { class="active nav-item" }>
+			<a @@if (context.path==='news') {href="#"} @@if(context.path==='home' ){href="./pages/news/index.html" } 
+			@@if(context.path !=='news'){href="../news/index.html" }>新闻</a>
+		</li>
+		<li @@if (context.about==='active') { class="active nav-item" }>
+			<a @@if (context.path==='about') {href="#"} @@if(context.path==='home' ){href="./pages/about/index.html" } @@if(context.path!=='about') {href="../about/index.html"}>关于</a>
+		</li>
+		<li class="nav-item">联系</li>
+	</ul>
+</header>
