@@ -27,7 +27,7 @@ const autoprefixer = require('gulp-autoprefixer');
 
 // 引入实时刷新
 const connect = require('gulp-connect');
-const open = require('open')
+
 // 引入文件重命名
 const rename = require('gulp-rename')
 
@@ -59,7 +59,7 @@ function server(cb) {
 		port: 8000,
 		livereload: true
 	});
-	open('http://localhost:8000');
+	// open('http://localhost:8000');
 	watch('./src/index.html', aboutHtml)
 	watch('./src/**/**/index.html', aboutHtml)
 	watch('./src/common/html/**/index.html', aboutHtml)
@@ -91,7 +91,7 @@ function aboutCss(cb) {
 		.pipe(autoprefixer({}))
 		.pipe(minifycss())
 		.pipe(rename({
-			suffix: '.min' //rename只是给上一步骤产出的压缩的styles.css重命名为style.min.css
+			suffix: '-min' //rename只是给上一步骤产出的压缩的styles.css重命名为style.min.css
 		}))
 		.pipe(dest('./dist'))
 		.pipe(connect.reload())
@@ -100,7 +100,7 @@ function aboutCss(cb) {
 
 // 拷贝文件 一般指的是common文件夹下的lib文件夹 一般指的是插件类型
 function copyLib(cb) {
-	src(['./src/common/lib/**/*.css', './src/common/lib/**/*.js'])
+	src(['./src/common/lib/**/*'])
 		.pipe(dest('./dist/common/lib'))
 	cb();
 }
@@ -142,5 +142,5 @@ function aboutJs(cb) {
 	cb();
 }
 
-exports.dev = series(devAboutImg, aboutHtml, aboutCss, copyImgs, copyLib, copyCSS, aboutJs, server);
+exports.dev = series(devAboutImg, aboutHtml, aboutCss, copyImgs, copyLib, copyCSS, aboutJs,server);
 exports.build = series(aboutHtml, aboutCss, copyImgs, copyLib, copyCSS, aboutJs, aboutImg);
