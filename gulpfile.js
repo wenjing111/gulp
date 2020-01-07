@@ -20,7 +20,7 @@ const htmlminOptions = {
 	removeStyleLinkTypeAttributes: true, //删除<style>和<link>的type="text/css"
 }
 
-// 引入sass编译 及 css压缩 及自动添加样式熟悉前缀
+// 引入sass编译 及 css压缩 及自动添加css样式前缀
 const sass = require('gulp-sass')
 const minifycss = require('gulp-minify-css')
 const autoprefixer = require('gulp-autoprefixer');
@@ -91,7 +91,7 @@ function aboutCss(cb) {
 		.pipe(autoprefixer({}))
 		.pipe(minifycss())
 		.pipe(rename({
-			suffix: '-min' //rename只是给上一步骤产出的压缩的styles.css重命名为style.min.css
+			suffix: '-min' //rename只是给上一步骤产出的压缩的styles.css重命名为style-min.css
 		}))
 		.pipe(dest('./dist'))
 		.pipe(connect.reload())
